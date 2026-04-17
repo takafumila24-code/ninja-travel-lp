@@ -1,17 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NINJA TRAVEL</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NINJA TRAVEL | Refined Journeys Through Japan</title>
+  <meta name="description" content="NINJA TRAVEL designs premium travel experiences in Japan for guests seeking private, curated, and seamless journeys." />
+  <style>
+    :root {
+      --navy: #0f1b2d;
+      --navy-soft: #1c2a3a;
+      --gold: #c8a95a;
+      --gold-soft: #b89a4f;
+      --ivory: #f5f3ee;
+      --white: #ffffff;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.74);
+      --line: rgba(255,255,255,0.14);
+      --shadow: 0 24px 60px rgba(0,0,0,0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--navy);
+      color: var(--text);
+      font-family: "Times New Roman", Georgia, serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(8, 14, 24, 0.52), rgba(8, 14, 24, 0.72)),
+        radial-gradient(circle at top, rgba(200,169,90,0.14), transparent 36%),
+        url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat fixed;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      width: 100%;
+      padding: 28px 36px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(8, 14, 24, 0.62), rgba(8, 14, 24, 0));
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(200,169,90,0.55);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      backdrop-filter: blur(2px);
+    }
+
+    .brand-name {
+      font-size: 15px;
+      color: var(--ivory);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav a:hover { color: var(--white); }
+
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-card {
+      width: min(1120px, 100%);
+      padding: 76px 56px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,27,45,0.28), rgba(15,27,45,0.18));
+      backdrop-filter: blur(5px);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 8vw, 88px);
+      line-height: 0.98;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+
+    .hero-sub {
+      margin: 24px auto 0;
+      max-width: 780px;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-brand {
+      margin-top: 34px;
+      font-size: 14px;
+      letter-spacing: 0.40em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-actions {
+      margin-top: 42px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      min-width: 220px;
+      padding: 16px 26px;
+      border-radius: 999px;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #231a0b;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(200,169,90,0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(200,169,90,0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.16);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    .section {
+      padding: 90px 24px;
+    }
+
+    .section-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .intro,
+    .services,
+    .why,
+    .cta-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .intro { grid-template-columns: 1.05fr 0.95fr; }
+    .services { grid-template-columns: repeat(3, 1fr); margin-top: 28px; }
+    .why { grid-template-columns: repeat(3, 1fr); }
+    .cta-grid { grid-template-columns: 1.1fr 0.9fr; }
+
+    .panel,
+    .service-card,
+    .why-card,
+    .contact-card {
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(10, 18, 31, 0.42);
+      backdrop-filter: blur(4px);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.15;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .body-copy {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .feature-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 18px;
+    }
+
+    .feature-list li {
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      color: var(--ivory);
+      font-size: 18px;
+    }
+
+    .feature-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .feature-list li span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .service-title,
+    .why-title {
+      color: var(--white);
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .service-copy,
+    .why-copy,
+    .contact-copy {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .service-note {
+      margin-top: 18px;
+      color: var(--gold);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-links {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-link {
+      padding: 16px 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      color: var(--ivory);
+      background: rgba(255,255,255,0.03);
+      transition: 0.25s ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .footer {
+      padding: 28px 24px 36px;
+      color: rgba(255,255,255,0.58);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .intro,
+      .services,
+      .why,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .header { padding: 20px 18px; }
+      .nav { display: none; }
+      .hero-card { padding: 52px 24px; border-radius: 22px; }
+      .panel,
+      .service-card,
+      .why-card,
+      .contact-card { padding: 28px; }
+    }
+  </style>
 </head>
-<body style="margin:0; background:#0f1b2d; color:white; font-family:serif; text-align:center;">
-  <div style="padding:120px 20px;">
-    <h1 style="font-size:60px; letter-spacing:2px;">NINJA TRAVEL</h1>
-    <p style="font-size:20px; opacity:0.8;">
-      Your gateway to Japan.<br>
-      Curated luxury experiences.
-    </p>
+<body>
+  <div class="site-shell">
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="NINJA TRAVEL home">
+          <div class="brand-mark">✦</div>
+          <div class="brand-name">NINJA TRAVEL</div>
+        </a>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#why">Why Us</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-card">
+          <p class="eyebrow">Japan, Refined</p>
+          <h1>Refined journeys through Japan</h1>
+          <p class="hero-sub">Private. Curated. Seamless. Designed for guests who seek more than sightseeing and expect every detail to feel considered.</p>
+          <div class="hero-brand">NINJA TRAVEL</div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#services">Explore Experiences</a>
+            <a class="btn btn-secondary" href="#contact">Contact Us</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-inner intro">
+          <div class="panel">
+            <div class="section-label">About NINJA TRAVEL</div>
+            <h2>We design premium travel experiences in Japan.</h2>
+            <p class="body-copy">
+              NINJA TRAVEL is not a typical travel agency. We create journeys with atmosphere, precision, and discretion for guests who value quality over volume. Every itinerary is shaped around comfort, access, and the quiet elegance that makes Japan unforgettable.
+            </p>
+          </div>
+          <div class="panel">
+            <div class="section-label">What We Offer</div>
+            <ul class="feature-list">
+              <li>
+                Private, curated planning
+                <span>Each journey is designed personally, with careful attention to pace, style, and purpose.</span>
+              </li>
+              <li>
+                High-end local coordination
+                <span>From hospitality to transportation, details are arranged with a premium and discreet approach.</span>
+              </li>
+              <li>
+                Multilingual guest support
+                <span>Clear communication and reliable coordination for international clients throughout the experience.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="section-inner">
+          <div class="section-label">Services</div>
+          <h2>Three core experiences, designed for high-value guests.</h2>
+          <div class="services">
+            <div class="service-card">
+              <div class="service-title">VIP Travel Experiences</div>
+              <div class="service-copy">
+                Fully customized journeys for guests who want private access, refined hospitality, and a seamless experience from arrival to departure.
+              </div>
+              <div class="service-note">Tailored luxury itineraries</div>
+            </div>
+            <div class="service-card">
+              <div class="service-title">Real Estate & Investment Tours</div>
+              <div class="service-copy">
+                Curated property tours for overseas clients seeking to understand Japan through investment opportunities, guided viewings, and trusted local introductions.
+              </div>
+              <div class="service-note">For serious buyers and investors</div>
+            </div>
+            <div class="service-card">
+              <div class="service-title">Medical & Beauty Travel</div>
+              <div class="service-copy">
+                Premium coordination for guests visiting Japan for cosmetic, wellness, or medical purposes, supported by local partnerships and careful scheduling.
+              </div>
+              <div class="service-note">Comfort, trust, and discretion</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="section-inner">
+          <div class="section-label">Why NINJA TRAVEL</div>
+          <div class="why">
+            <div class="why-card">
+              <div class="why-title">Japanese aesthetics</div>
+              <div class="why-copy">We value restraint, balance, atmosphere, and detail. That philosophy shapes every part of the guest experience.</div>
+            </div>
+            <div class="why-card">
+              <div class="why-title">Trusted local network</div>
+              <div class="why-copy">Our journeys are built through reliable local relationships, making access smoother and coordination stronger.</div>
+            </div>
+            <div class="why-card">
+              <div class="why-title">Discreet, high-end service</div>
+              <div class="why-copy">We do not overwhelm. We arrange, refine, and guide with a quiet level of care that luxury clients appreciate.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-inner cta-grid">
+          <div class="contact-card">
+            <div class="section-label">Start Your Journey</div>
+            <h3>Tell us what you are looking for.</h3>
+            <p class="contact-copy">
+              Whether you are planning a private journey, a property visit, or a premium beauty and medical stay in Japan, we will design the most suitable next step.
+            </p>
+          </div>
+          <div class="contact-card">
+            <div class="section-label">Contact</div>
+            <div class="contact-links">
+              <a class="contact-link" href="#">WhatsApp</a>
+              <a class="contact-link" href="#">LINE</a>
+              <a class="contact-link" href="#">WeChat</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      NINJA TRAVEL / Royal Blue LLC
+    </footer>
   </div>
 </body>
 </html>
